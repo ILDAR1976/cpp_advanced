@@ -2,6 +2,13 @@
 #include <unordered_set>
 using namespace std;
 
+// Linked list node
+struct Node
+{
+    int data;
+    Node* next;
+};
+
 void push(Node*&, int);
 bool detectCycle(Node*);
 
@@ -22,20 +29,15 @@ int main()
 
     if (detectCycle(head)) {
         cout << "Cycle Found";
+        
     }
     else {
         cout << "No Cycle Found";
     }
-
     return 0;
 }
 
-// Linked list node
-struct Node
-{
-    int data;
-    Node* next;
-};
+
 
 // Auxiliary function to create a new node with the specified data and
 // places it at the top of the list
@@ -58,8 +60,10 @@ bool detectCycle(Node* head)
     // list bypass
     while (curr)
     {
+        cout << curr->data << " ";
         // returns false if we have already seen this node before
         if (set.find(curr) != set.end()) {
+            cout << endl;
             return true;
         }
 
@@ -70,6 +74,8 @@ bool detectCycle(Node* head)
         curr = curr->next;
     }
 
+    cout << endl;
     // we reach this point if the list does not contain any cycles
     return false;
 }
+
