@@ -11,12 +11,13 @@ struct Node
 
 void push(Node*&, int);
 bool detectCycle(Node*);
+int detectCycle2(Node*);
 
 
 int main()
 {
     // input keys
-    int keys[] = { 1, 2, 3, 4, 5 };
+    int keys[] = { 1, 2, 3, 4, 5, 6 };
     int n = sizeof(keys) / sizeof(keys[0]);
 
     Node* head = nullptr;
@@ -25,11 +26,11 @@ int main()
     }
 
     // insert cycle
-    head->next->next->next->next->next = head->next->next;
+    head->next->next->next->next->next->next = head->next->next;
 
     if (detectCycle(head)) {
+        cout << "scycle start point: "<< detectCycle2(head) << endl;
         cout << "Cycle Found";
-        
     }
     else {
         cout << "No Cycle Found";
@@ -79,3 +80,36 @@ bool detectCycle(Node* head)
     return false;
 }
 
+int detectCycle2(Node* head)
+{
+    Node* fast = head;
+    Node* slow = head;
+
+    while (fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (fast == slow) {
+            break;
+        }
+    }
+
+
+    // cycle check
+    if (fast == NULL || fast->next == NULL)
+    {
+        return -1;
+    }
+
+    // Place the slow pointer at the beginning of the list
+    // Leave the quick pointer at the meeting point
+    // run both pointers at the same speed
+    slow = head;
+    while (slow != fast)
+    {
+        slow = slow->next;
+        fast = fast->next;
+    }
+
+    // if there is a loop, the pointers will meet at the loop start point
+    return slow->data;
+}

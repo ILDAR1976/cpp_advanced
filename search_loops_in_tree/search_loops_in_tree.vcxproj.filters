@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="search_loops_in_tree.cpp">
+    <ClCompile Include="search_loops_in_single_connected_list.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
